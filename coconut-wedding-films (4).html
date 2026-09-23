@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coconut Wedding Films</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e130f; --bg2:#141a15; --cream:#f4f0e6; --gold:#c9a24d; --gold-soft:#e3c98a;
+    --ink:#eae6d9; --muted:#a9a99a; --line:rgba(234,230,217,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--ink); font-family:'Jost',sans-serif; font-weight:300; overflow-x:hidden;}
+  h1,h2,h3{font-family:'Cormorant Garamond',serif; font-weight:500; letter-spacing:.01em;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1240px; margin:0 auto; padding:0 5vw;}
+
+  /* photo frame: any image block with an optional text overlay */
+  .frame{position:relative; overflow:hidden; background:#1b1f16;}
+  .frame img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;}
+  .frame .shade{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.65) 100%);}
+  .frame .caption{position:absolute; left:0; right:0; bottom:0; padding:16px; z-index:2;}
+
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:2px; font-size:14px; letter-spacing:.03em; transition:opacity .2s;}
+  .btn:hover{opacity:.85;}
+  .btn-gold{background:var(--gold-soft); color:#211a0e;}
+  .btn-outline{border:1px solid var(--line); color:var(--ink);}
+  .eyebrow{color:var(--gold-soft); font-size:12px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:10px;}
+  section{padding:90px 0;}
+
+  /* header */
+  header{position:sticky; top:0; z-index:50; background:rgba(14,19,15,.85); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
+  header .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:20px; padding-bottom:20px;}
+  .logo{font-family:'Cormorant Garamond',serif; font-size:22px; letter-spacing:.06em;}
+  .logo span{display:block; font-family:'Jost',sans-serif; font-size:9px; letter-spacing:.28em; color:var(--muted); margin-top:2px;}
+  nav ul{list-style:none; display:flex; gap:34px; font-size:14px; color:var(--muted);}
+  nav a:hover{color:var(--ink);}
+  .head-actions{display:flex; align-items:center; gap:16px;}
+  .wa{width:36px; height:36px; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:16px;}
+  @media(max-width:860px){nav{display:none;} }
+
+  /* hero */
+  .hero{padding-top:56px; padding-bottom:56px;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 1fr; gap:40px; align-items:center;}
+  .hero h1{font-size:clamp(30px,4vw,46px); line-height:1.12; margin:14px 0 6px;}
+  .hero em{font-style:italic; color:var(--gold-soft); font-weight:400;}
+  .hero .loc{color:var(--muted); font-size:13px; letter-spacing:.08em; margin:18px 0 28px;}
+  .hero-actions{display:flex; gap:14px; margin-bottom:40px; flex-wrap:wrap;}
+  .stats{display:flex; gap:34px; border-top:1px solid var(--line); padding-top:26px; flex-wrap:wrap;}
+  .stats div b{display:block; font-family:'Cormorant Garamond',serif; font-size:26px; color:var(--gold-soft);}
+  .stats div span{font-size:11px; color:var(--muted); letter-spacing:.03em;}
+  .hero-img{aspect-ratio:4/5; border-radius:2px;}
+  .play-chip{display:flex; align-items:center; gap:10px; font-size:12px; color:#fff;}
+  .play-circ{width:38px; height:38px; border-radius:50%; border:1px solid var(--gold-soft); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;} .hero-img{aspect-ratio:16/10;}}
+
+  /* stories */
+  .row-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:30px; flex-wrap:wrap; gap:14px;}
+  .stories-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px;}
+  .story{aspect-ratio:3/4.3; border-radius:2px;}
+  .story b{font-size:14px; display:block; color:#fff;}
+  .story span{font-size:11px; color:var(--gold-soft);}
+  @media(max-width:900px){.stories-grid{grid-template-columns:repeat(2,1fr);}}
+
+  /* why us */
+  .why{background:var(--bg2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .why-grid{display:grid; grid-template-columns:1fr 1.3fr; gap:60px; align-items:center;}
+  .why p{color:var(--muted); max-width:40ch; margin:16px 0 26px; line-height:1.7; font-size:15px;}
+  .feat-row{display:grid; grid-template-columns:repeat(5,1fr); gap:20px;}
+  .feat b{display:block; font-family:'Cormorant Garamond',serif; font-size:20px; margin:14px 0 3px;}
+  .feat span{font-size:11px; color:var(--muted);}
+  .icon{width:34px; height:34px; border:1px solid var(--gold-soft); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold-soft); font-size:15px;}
+  @media(max-width:900px){.why-grid{grid-template-columns:1fr;} .feat-row{grid-template-columns:repeat(2,1fr); row-gap:28px;}}
+
+  /* work / cream section */
+  .cream{background:var(--cream); color:#26231b;}
+  .cream .muted{color:#6e6a5c;}
+  .work-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:44px; align-items:center;}
+  .video-block{aspect-ratio:16/10.5; border-radius:2px; display:flex; align-items:flex-end;}
+  .video-block .caption{display:flex; align-items:center; gap:10px;}
+  .video-block .play-circ{width:56px; height:56px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);}
+  .cat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:24px;}
+  .cat{aspect-ratio:1/1.05; border-radius:2px;}
+  .cat span{font-size:12px; color:#fff;}
+  @media(max-width:900px){.work-grid{grid-template-columns:1fr;} .cat-grid{grid-template-columns:repeat(2,1fr);}}
+
+  /* reviews */
+  .rev-grid{display:grid; grid-template-columns:1fr .8fr 1fr; gap:40px; align-items:center;}
+  .quote-card{border-radius:2px; min-height:210px; display:flex; align-items:flex-end;}
+  .quote-card .caption{padding:22px;}
+  .quote-card blockquote{font-size:14px; line-height:1.6; color:#fff; font-style:italic;}
+  .quote-card cite{display:block; margin-top:10px; font-style:normal; font-size:12px; color:var(--gold-soft);}
+  .g-rev b{font-family:'Cormorant Garamond',serif; font-size:34px; display:block; margin:8px 0 4px;}
+  .stars{color:var(--gold-soft); letter-spacing:2px;}
+  .insta-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
+  .insta{aspect-ratio:1/1; border-radius:2px;}
+  @media(max-width:900px){.rev-grid{grid-template-columns:1fr; text-align:center;} .g-rev{order:-1;}}
+
+  /* packages */
+  .pkg-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:22px;}
+  .pkg-card{border:1px solid #d8d2bf; border-radius:2px; padding:20px; background:#faf8f1;}
+  .pkg-card .icon{border-color:#26231b; color:#26231b;}
+  .pkg-card b{display:block; margin-top:14px; font-family:'Cormorant Garamond',serif; font-size:18px;}
+  .pkg-card span{font-size:12px; color:#6e6a5c;}
+
+  /* faq + form */
+  .faq-grid{display:grid; grid-template-columns:1fr 1.1fr; gap:50px;}
+  .faq-item{border-bottom:1px solid var(--line); padding:18px 0; display:flex; justify-content:space-between; align-items:center; font-size:15px;}
+  .faq-item span{color:var(--gold-soft); font-size:18px;}
+  .form-card{background:var(--cream); color:#26231b; border-radius:2px; padding:30px;}
+  .form-card label{font-size:11px; letter-spacing:.05em; color:#6e6a5c; display:block; margin-bottom:6px; text-transform:uppercase;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;}
+  .form-card input, .form-card select{width:100%; padding:11px 12px; border:1px solid #d8d2bf; background:#fff; font-family:inherit; font-size:13px; border-radius:1px;}
+  .form-card button{width:100%; margin-top:8px; padding:14px; background:#1a1712; color:#f4f0e6; border:none; font-size:14px; letter-spacing:.03em; cursor:pointer;}
+  @media(max-width:900px){.faq-grid{grid-template-columns:1fr;} .form-row{grid-template-columns:1fr;}}
+
+  /* cta */
+  .cta{text-align:center; padding:110px 0;}
+  .cta .caption{position:relative; padding:0;}
+  .cta h2{font-size:clamp(26px,4vw,40px); margin:10px 0 8px; color:#fff;}
+  .cta .eyebrow{color:var(--gold-soft);}
+  .cta .hero-actions{justify-content:center;}
+
+  footer{background:var(--cream); color:#26231b; padding:50px 0 26px; border-top:1px solid #e3ddc8;}
+  .foot-top{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; padding-bottom:30px; border-bottom:1px solid #e3ddc8;}
+  .foot-nav ul{list-style:none; display:flex; gap:26px; flex-wrap:wrap; font-size:13px; color:#544f3f;}
+  .foot-bottom{display:flex; justify-content:space-between; padding-top:20px; font-size:12px; color:#8a8570; flex-wrap:wrap; gap:10px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">COCONUT<span>WEDDING FILMS</span></div>
+    <nav><ul>
+      <li><a href="#top">Home</a></li>
+      <li><a href="#why">About</a></li>
+      <li><a href="#stories">Portfolio</a></li>
+      <li><a href="#work">Films</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul></nav>
+    <div class="head-actions">
+      <a href="#contact" class="btn btn-gold" style="padding:10px 20px; font-size:13px;">Check Your Date</a>
+      <div class="wa">◔</div>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Coconut Wedding Films</div>
+        <h1>Wedding Photography &amp; Films<br><em>for the moments you'll never get back.</em></h1>
+        <div class="loc">KERALA · INDIA · WORLDWIDE</div>
+        <div class="hero-actions">
+          <a href="#stories" class="btn btn-gold">View Our Work →</a>
+          <a href="#contact" class="btn btn-outline">Check Your Date</a>
+        </div>
+        <div class="stats">
+          <div><b>11+</b><span>Years of Experience</span></div>
+          <div><b>600+</b><span>Weddings Captured</span></div>
+          <div><b>Kerala</b><span>Based in Thrissur</span></div>
+          <div><b>Pan-India</b><span>&amp; Destination</span></div>
+        </div>
+      </div>
+      <div class="hero-img frame">
+        <img src="images/hero.jpg" alt="Couple portrait">
+        <div class="shade"></div>
+        <div class="caption"><div class="play-chip"><div class="play-circ">▶</div> Watch Our Showreel · 0:32</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stories" style="padding-top:20px;">
+    <div class="wrap">
+      <div class="row-head">
+        <div>
+          <div class="eyebrow">Featured Weddings</div>
+          <h2 style="font-size:28px;">Real Love Stories</h2>
+        </div>
+        <a href="#" class="btn btn-outline" style="padding:10px 18px; font-size:13px;">View All Stories →</a>
+      </div>
+      <div class="stories-grid">
+        <div class="story frame"><img src="images/story-1.jpg" alt="Sreejith and Aakriti wedding"><div class="shade"></div><div class="caption"><b>Sreejith + Aakriti</b><span>Thrissur · Kerala</span></div></div>
+        <div class="story frame"><img src="images/story-2.jpg" alt="Eyne and Joel wedding"><div class="shade"></div><div class="caption"><b>Eyne + Joel</b><span>Kochi · Kerala</span></div></div>
+        <div class="story frame"><img src="images/story-3.jpg" alt="Aswth and Sapna wedding"><div class="shade"></div><div class="caption"><b>Aswth + Sapna</b><span>Munnar · Kerala</span></div></div>
+        <div class="story frame"><img src="images/story-4.jpg" alt="Durga Krishna and Arjun wedding"><div class="shade"></div><div class="caption"><b>Durga Krishna + Arjun</b><span>Calicut · Kerala</span></div></div>
+        <div class="story frame"><img src="images/story-5.jpg" alt="Durga Krishna and Arjun wedding"><div class="shade"></div><div class="caption"><b>Durga Krishna + Arjun</b><span>Calicut · Kerala</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why" id="why">
+    <div class="wrap why-grid">
+      <div>
+        <div class="eyebrow">Why Coconut</div>
+        <h2 style="font-size:30px;">More Than Just<br>Photography &amp; Films</h2>
+        <p>We're a team of storytellers, capturing real emotions, raw moments and timeless memories. From intimate ceremonies to grand celebrations, we bring your story to life with heart and detail.</p>
+        <a href="#" class="btn btn-gold">About Us →</a>
+      </div>
+      <div class="feat-row">
+        <div class="feat"><div class="icon">◈</div><b>11+</b><span>Years Experience</span></div>
+        <div class="feat"><div class="icon">◈</div><b>600+</b><span>Weddings Captured</span></div>
+        <div class="feat"><div class="icon">◈</div><b>Kerala</b><span>Based in Thrissur</span></div>
+        <div class="feat"><div class="icon">◈</div><b>Pan-India</b><span>&amp; Worldwide</span></div>
+        <div class="feat"><div class="icon">◈</div><b>One Team</b><span>Photography + Films</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cream" id="work">
+    <div class="wrap work-grid">
+      <div class="video-block frame">
+        <img src="images/video-thumb.jpg" alt="Wedding film still">
+        <div class="shade"></div>
+        <div class="caption" style="text-align:center; width:100%;">Watch the Coconut Story · 0:22</div>
+      </div>
+      <div>
+        <div class="eyebrow" style="color:#8a7433;">Our Work</div>
+        <h2 style="font-size:28px;">Photography &amp; Cinematography</h2>
+        <div class="cat-grid">
+          <div class="cat frame"><img src="images/cat-candid.jpg" alt="Candid photography"><div class="shade"></div><div class="caption"><span>Candid</span></div></div>
+          <div class="cat frame"><img src="images/cat-traditional.jpg" alt="Traditional photography"><div class="shade"></div><div class="caption"><span>Traditional</span></div></div>
+          <div class="cat frame"><img src="images/cat-editorial.jpg" alt="Editorial photography"><div class="shade"></div><div class="caption"><span>Editorial</span></div></div>
+          <div class="cat frame"><img src="images/cat-couples.jpg" alt="Couples photography"><div class="shade"></div><div class="caption"><span>Couples</span></div></div>
+        </div>
+        <a href="#" style="display:inline-block; margin-top:18px; font-size:13px; border-bottom:1px solid #26231b;">View Full Portfolio →</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">What Our Couples Say</div>
+      <h2 style="font-size:28px; margin-bottom:30px;">Real People. Real Stories.</h2>
+      <div class="rev-grid">
+        <div class="quote-card frame">
+          <img src="images/testimonial-1.jpg" alt="Aswin and Sneha">
+          <div class="shade"></div>
+          <div class="caption"><blockquote>"The team made us feel so comfortable and captured every emotion so beautifully. We couldn't have asked for more!"<cite>— Aswin &amp; Sneha, Thrissur</cite></blockquote></div>
+        </div>
+        <div class="g-rev" style="text-align:center;">
+          <span style="color:var(--gold-soft); font-size:20px;">G</span>
+          <span style="display:block; font-size:13px; color:var(--muted);">Google Reviews</span>
+          <b>4.9/5</b>
+          <div class="stars">★★★★★</div>
+          <span style="font-size:12px; color:var(--muted);">120+ reviews</span><br>
+          <a href="#" style="font-size:12px; color:var(--gold-soft); display:inline-block; margin-top:10px;">Read All Reviews →</a>
+        </div>
+        <div>
+          <span style="font-size:12px; color:var(--muted);">Follow the Stories · @coconutweddingfilms</span>
+          <div class="insta-grid" style="margin-top:14px;">
+            <div class="insta frame"><img src="images/insta-1.jpg" alt="Instagram post"></div>
+            <div class="insta frame"><img src="images/insta-2.jpg" alt="Instagram post"></div>
+            <div class="insta frame"><img src="images/insta-3.jpg" alt="Instagram post"></div>
+            <div class="insta frame"><img src="images/insta-4.jpg" alt="Instagram post"></div>
+            <div class="insta frame"><img src="images/insta-5.jpg" alt="Instagram post"></div>
+            <div class="insta frame"><img src="images/insta-6.jpg" alt="Instagram post"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cream" id="packages">
+    <div class="wrap">
+      <div class="eyebrow" style="color:#8a7433;">Our Packages</div>
+      <h2 style="font-size:28px;">Wedding Collections</h2>
+      <p class="muted" style="max-width:44ch; margin-top:8px;">Flexible packages to suit your needs. Custom quotes for destination weddings.</p>
+      <div class="pkg-grid">
+        <div class="pkg-card"><div class="icon">◈</div><b>Photography</b><span>From ₹ XX,XXX</span></div>
+        <div class="pkg-card"><div class="icon">◈</div><b>Cinematography</b><span>From ₹ XX,XXX</span></div>
+        <div class="pkg-card"><div class="icon">◈</div><b>Photo + Film</b><span>From ₹ XX,XXX</span></div>
+      </div>
+      <a href="#contact" class="btn" style="background:#1a1712; color:#f4f0e6; margin-top:22px;">Get Complete Package →</a>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap faq-grid">
+      <div>
+        <div class="eyebrow">Frequently Asked Questions</div>
+        <h2 style="font-size:28px; margin-bottom:16px;">Get Questions?</h2>
+        <div class="faq-item">How early should we book you? <span>+</span></div>
+        <div class="faq-item">Do you travel outside Kerala? <span>+</span></div>
+        <div class="faq-item">How many photographers come? <span>+</span></div>
+        <div class="faq-item">When will we receive the photos? <span>+</span></div>
+        <div class="faq-item">Do you provide drone coverage? <span>+</span></div>
+        <a href="#" style="display:inline-block; margin-top:18px; font-size:13px; color:var(--gold-soft);">View All FAQs →</a>
+      </div>
+      <div class="form-card" id="contact">
+        <div class="eyebrow" style="color:#8a7433;">Check Your Wedding Date</div>
+        <h3 style="font-size:20px; margin-bottom:18px;">Let's see if your date is available!</h3>
+        <div class="form-row">
+          <div><label>Wedding Date</label><input type="text" placeholder="DD / MM / YYYY"></div>
+          <div><label>Location</label><input type="text" placeholder="e.g. Kochi, Thrissur, Dubai"></div>
+        </div>
+        <div class="form-row">
+          <div><label>Your Name</label><input type="text" placeholder="Full Name"></div>
+          <div><label>WhatsApp Number</label><input type="text" placeholder="+91 98765 43210"></div>
+        </div>
+        <div class="form-row">
+          <div><label>Service Interested In</label><select><option>Select an option</option></select></div>
+          <div><label>Estimated Budget</label><select><option>Select budget range</option></select></div>
+        </div>
+        <button type="button">Check Availability →</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta frame">
+    <img src="images/cta-bg.jpg" alt="Wedding decor">
+    <div class="shade"></div>
+    <div class="wrap caption">
+      <div class="eyebrow">Let's Create Something Beautiful</div>
+      <h2>Your wedding happens once.<br><span style="color:var(--gold-soft); font-size:.6em;">Let's make sure you remember it properly.</span></h2>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-gold">WhatsApp Us ◔</a>
+        <a href="#contact" class="btn btn-outline">Check Your Date</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="logo" style="color:#26231b;">COCONUT<span style="color:#6e6a5c;">WEDDING FILMS</span></div>
+      <nav class="foot-nav"><ul>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#why">About</a></li>
+        <li><a href="#stories">Portfolio</a></li>
+        <li><a href="#work">Films</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul></nav>
+    </div>
+    <div class="foot-bottom">
+      <span>Irinjalakuda, Thrissur, Kerala, India · Worldwide</span>
+      <span>© 2026 Coconut Wedding Films. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
