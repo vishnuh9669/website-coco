@@ -2,351 +2,315 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Coconut Wedding Films</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#0e130f; --bg2:#141a15; --cream:#f4f0e6; --gold:#c9a24d; --gold-soft:#e3c98a;
-    --ink:#eae6d9; --muted:#a9a99a; --line:rgba(234,230,217,0.14);
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{background:var(--bg); color:var(--ink); font-family:'Jost',sans-serif; font-weight:300; overflow-x:hidden;}
-  h1,h2,h3{font-family:'Cormorant Garamond',serif; font-weight:500; letter-spacing:.01em;}
-  a{color:inherit; text-decoration:none;}
-  .wrap{max-width:1240px; margin:0 auto; padding:0 5vw;}
+:root{
+  --ink:#141210; --paper:#f7f3ec; --cream:#ece4d6; --line:rgba(20,18,16,.15);
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;overflow-x:hidden;font-weight:300}
+h1,h2,.serif{font-family:'Playfair Display',serif;font-weight:400}
+.upx{font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:500}
+.wrap{max-width:1400px;margin:0 auto;padding:0 6vw}
+img.ph{display:block;width:100%;height:100%;object-fit:cover}
 
-  /* photo frame: any image block with an optional text overlay */
-  .frame{position:relative; overflow:hidden; background:#1b1f16;}
-  .frame img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;}
-  .frame .shade{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.65) 100%);}
-  .frame .caption{position:absolute; left:0; right:0; bottom:0; padding:16px; z-index:2;}
+/* placeholder "photo" blocks — swap for next/image in production */
+.ph-block{background:linear-gradient(135deg,#d8cdb8,#a99f8c 55%,#5d564a);position:relative;overflow:hidden}
+.ph-block::after{content:attr(data-label);position:absolute;bottom:10px;left:12px;color:rgba(255,255,255,.75);font-family:'Inter';font-size:.65rem;letter-spacing:.15em;text-transform:uppercase}
+.ph-block.b{background:linear-gradient(135deg,#3a352d,#171512)}
+.ph-block.b::after{color:rgba(255,255,255,.4)}
 
-  .btn{display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:2px; font-size:14px; letter-spacing:.03em; transition:opacity .2s;}
-  .btn:hover{opacity:.85;}
-  .btn-gold{background:var(--gold-soft); color:#211a0e;}
-  .btn-outline{border:1px solid var(--line); color:var(--ink);}
-  .eyebrow{color:var(--gold-soft); font-size:12px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:10px;}
-  section{padding:90px 0;}
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:28px 6vw;padding-top:calc(28px + env(safe-area-inset-top,0px));display:flex;align-items:center;justify-content:space-between;transition:background .5s ease,padding .4s ease,box-shadow .4s ease;color:#fff}
+nav.solid{background:var(--paper);color:var(--ink);padding-top:calc(16px + env(safe-area-inset-top,0px));padding-bottom:16px;box-shadow:0 1px 0 var(--line)}
+nav .logo{font-family:'Playfair Display',serif;font-size:1.3rem;letter-spacing:.08em}
+nav ul{list-style:none;display:flex;gap:40px}
+nav ul a{color:inherit;text-decoration:none;position:relative}
+nav ul a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;background:currentColor;transition:width .35s ease}
+nav ul a:hover::after{width:100%}
+nav .social{display:flex;gap:16px}
+@media(max-width:820px){nav ul{display:none}}
 
-  /* header */
-  header{position:sticky; top:0; z-index:50; background:rgba(14,19,15,.85); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
-  header .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:20px; padding-bottom:20px;}
-  .logo{font-family:'Cormorant Garamond',serif; font-size:22px; letter-spacing:.06em;}
-  .logo span{display:block; font-family:'Jost',sans-serif; font-size:9px; letter-spacing:.28em; color:var(--muted); margin-top:2px;}
-  nav ul{list-style:none; display:flex; gap:34px; font-size:14px; color:var(--muted);}
-  nav a:hover{color:var(--ink);}
-  .head-actions{display:flex; align-items:center; gap:16px;}
-  .wa{width:36px; height:36px; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:16px;}
-  @media(max-width:860px){nav{display:none;} }
+/* hero */
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden}
+.hero-img{position:absolute;inset:0;opacity:0;animation:crossfade 14s infinite}
+.hero-img:nth-child(2){animation-delay:7s}
+@keyframes crossfade{
+  0%{opacity:0;transform:scale(1.08)}
+  8%{opacity:1}
+  43%{opacity:1;transform:scale(1)}
+  50%{opacity:0}
+  100%{opacity:0}
+}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.15) 40%,rgba(0,0,0,.5));z-index:1}
+.hero-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;padding:0 6vw}
+.hero-content h1{font-size:clamp(2.6rem,7vw,5.6rem);line-height:1.05;opacity:0;animation:riseIn 1.4s .3s ease-out forwards}
+.hero-content .upx{margin-top:22px;opacity:0;animation:riseIn 1.4s .7s ease-out forwards}
+@keyframes riseIn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
 
-  /* hero */
-  .hero{padding-top:56px; padding-bottom:56px;}
-  .hero-grid{display:grid; grid-template-columns:1.05fr 1fr; gap:40px; align-items:center;}
-  .hero h1{font-size:clamp(30px,4vw,46px); line-height:1.12; margin:14px 0 6px;}
-  .hero em{font-style:italic; color:var(--gold-soft); font-weight:400;}
-  .hero .loc{color:var(--muted); font-size:13px; letter-spacing:.08em; margin:18px 0 28px;}
-  .hero-actions{display:flex; gap:14px; margin-bottom:40px; flex-wrap:wrap;}
-  .stats{display:flex; gap:34px; border-top:1px solid var(--line); padding-top:26px; flex-wrap:wrap;}
-  .stats div b{display:block; font-family:'Cormorant Garamond',serif; font-size:26px; color:var(--gold-soft);}
-  .stats div span{font-size:11px; color:var(--muted); letter-spacing:.03em;}
-  .hero-img{aspect-ratio:4/5; border-radius:2px;}
-  .play-chip{display:flex; align-items:center; gap:10px; font-size:12px; color:#fff;}
-  .play-circ{width:38px; height:38px; border-radius:50%; border:1px solid var(--gold-soft); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
-  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;} .hero-img{aspect-ratio:16/10;}}
+/* reveal */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s ease-out,transform .8s ease-out}
+.reveal.show{opacity:1;transform:translateY(0)}
 
-  /* stories */
-  .row-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:30px; flex-wrap:wrap; gap:14px;}
-  .stories-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px;}
-  .story{aspect-ratio:3/4.3; border-radius:2px;}
-  .story b{font-size:14px; display:block; color:#fff;}
-  .story span{font-size:11px; color:var(--gold-soft);}
-  @media(max-width:900px){.stories-grid{grid-template-columns:repeat(2,1fr);}}
+section{position:relative}
+.btn{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:4px;transition:opacity .3s}
+.btn:hover{opacity:.55}
+.circle-btn{width:64px;height:64px;border-radius:50%;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:300;color:var(--ink);text-decoration:none;transition:transform .4s ease,background .4s ease,color .4s ease}
+.circle-btn:hover{background:var(--ink);color:var(--paper);transform:rotate(90deg)}
 
-  /* why us */
-  .why{background:var(--bg2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
-  .why-grid{display:grid; grid-template-columns:1fr 1.3fr; gap:60px; align-items:center;}
-  .why p{color:var(--muted); max-width:40ch; margin:16px 0 26px; line-height:1.7; font-size:15px;}
-  .feat-row{display:grid; grid-template-columns:repeat(5,1fr); gap:20px;}
-  .feat b{display:block; font-family:'Cormorant Garamond',serif; font-size:20px; margin:14px 0 3px;}
-  .feat span{font-size:11px; color:var(--muted);}
-  .icon{width:34px; height:34px; border:1px solid var(--gold-soft); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold-soft); font-size:15px;}
-  @media(max-width:900px){.why-grid{grid-template-columns:1fr;} .feat-row{grid-template-columns:repeat(2,1fr); row-gap:28px;}}
+/* intro */
+.intro{padding:160px 0 120px;text-align:center}
+.intro h2{font-size:clamp(1.9rem,4vw,3rem);max-width:820px;margin:26px auto 40px;line-height:1.3}
 
-  /* work / cream section */
-  .cream{background:var(--cream); color:#26231b;}
-  .cream .muted{color:#6e6a5c;}
-  .work-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:44px; align-items:center;}
-  .video-block{aspect-ratio:16/10.5; border-radius:2px; display:flex; align-items:flex-end;}
-  .video-block .caption{display:flex; align-items:center; gap:10px;}
-  .video-block .play-circ{width:56px; height:56px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);}
-  .cat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:24px;}
-  .cat{aspect-ratio:1/1.05; border-radius:2px;}
-  .cat span{font-size:12px; color:#fff;}
-  @media(max-width:900px){.work-grid{grid-template-columns:1fr;} .cat-grid{grid-template-columns:repeat(2,1fr);}}
+/* film */
+.film{height:78vh;min-height:480px;position:relative;display:flex;align-items:flex-end;padding:60px 6vw}
+.film-media{position:absolute;inset:0;z-index:0}
+.film-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:1}
+.film h2{position:relative;z-index:2;color:#fff;font-size:clamp(2rem,5vw,3.6rem)}
 
-  /* reviews */
-  .rev-grid{display:grid; grid-template-columns:1fr .8fr 1fr; gap:40px; align-items:center;}
-  .quote-card{border-radius:2px; min-height:210px; display:flex; align-items:flex-end;}
-  .quote-card .caption{padding:22px;}
-  .quote-card blockquote{font-size:14px; line-height:1.6; color:#fff; font-style:italic;}
-  .quote-card cite{display:block; margin-top:10px; font-style:normal; font-size:12px; color:var(--gold-soft);}
-  .g-rev b{font-family:'Cormorant Garamond',serif; font-size:34px; display:block; margin:8px 0 4px;}
-  .stars{color:var(--gold-soft); letter-spacing:2px;}
-  .insta-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
-  .insta{aspect-ratio:1/1; border-radius:2px;}
-  @media(max-width:900px){.rev-grid{grid-template-columns:1fr; text-align:center;} .g-rev{order:-1;}}
+/* mission */
+.mission{padding:150px 0;text-align:center;position:relative}
+.mission .watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);font-family:'Playfair Display',serif;font-size:22vw;color:rgba(20,18,16,.04);white-space:nowrap;z-index:0;pointer-events:none}
+.mission-inner{position:relative;z-index:1}
+.mission h2{font-size:clamp(2rem,4.5vw,3.2rem);max-width:760px;margin:0 auto 44px;line-height:1.3}
+.cta-row{display:flex;justify-content:center;gap:60px}
 
-  /* packages */
-  .pkg-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:22px;}
-  .pkg-card{border:1px solid #d8d2bf; border-radius:2px; padding:20px; background:#faf8f1;}
-  .pkg-card .icon{border-color:#26231b; color:#26231b;}
-  .pkg-card b{display:block; margin-top:14px; font-family:'Cormorant Garamond',serif; font-size:18px;}
-  .pkg-card span{font-size:12px; color:#6e6a5c;}
+/* featured-in */
+.featured{padding:70px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.featured .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+.featured span{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:rgba(20,18,16,.55)}
 
-  /* faq + form */
-  .faq-grid{display:grid; grid-template-columns:1fr 1.1fr; gap:50px;}
-  .faq-item{border-bottom:1px solid var(--line); padding:18px 0; display:flex; justify-content:space-between; align-items:center; font-size:15px;}
-  .faq-item span{color:var(--gold-soft); font-size:18px;}
-  .form-card{background:var(--cream); color:#26231b; border-radius:2px; padding:30px;}
-  .form-card label{font-size:11px; letter-spacing:.05em; color:#6e6a5c; display:block; margin-bottom:6px; text-transform:uppercase;}
-  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;}
-  .form-card input, .form-card select{width:100%; padding:11px 12px; border:1px solid #d8d2bf; background:#fff; font-family:inherit; font-size:13px; border-radius:1px;}
-  .form-card button{width:100%; margin-top:8px; padding:14px; background:#1a1712; color:#f4f0e6; border:none; font-size:14px; letter-spacing:.03em; cursor:pointer;}
-  @media(max-width:900px){.faq-grid{grid-template-columns:1fr;} .form-row{grid-template-columns:1fr;}}
+/* portfolio */
+.portfolio{padding:150px 0}
+.portfolio-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:end;margin-bottom:50px}
+.portfolio-grid .tall{aspect-ratio:3/4}
+.portfolio-grid .short{aspect-ratio:4/5;margin-top:80px}
+.portfolio-text{max-width:520px}
+.portfolio-text .upx{color:rgba(20,18,16,.55)}
+.portfolio-text h2{font-size:clamp(1.8rem,3.5vw,2.6rem);margin:18px 0 30px}
+@media(max-width:760px){.portfolio-grid{grid-template-columns:1fr}.portfolio-grid .short{margin-top:0}}
 
-  /* cta */
-  .cta{text-align:center; padding:110px 0;}
-  .cta .caption{position:relative; padding:0;}
-  .cta h2{font-size:clamp(26px,4vw,40px); margin:10px 0 8px; color:#fff;}
-  .cta .eyebrow{color:var(--gold-soft);}
-  .cta .hero-actions{justify-content:center;}
+/* about teaser */
+.about-teaser{padding:0 0 150px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-teaser .ph-block{aspect-ratio:4/5}
+.about-teaser .copy p{font-size:1.1rem;line-height:1.75;max-width:440px;margin-bottom:30px}
+@media(max-width:760px){.about-teaser{grid-template-columns:1fr}}
 
-  footer{background:var(--cream); color:#26231b; padding:50px 0 26px; border-top:1px solid #e3ddc8;}
-  .foot-top{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; padding-bottom:30px; border-bottom:1px solid #e3ddc8;}
-  .foot-nav ul{list-style:none; display:flex; gap:26px; flex-wrap:wrap; font-size:13px; color:#544f3f;}
-  .foot-bottom{display:flex; justify-content:space-between; padding-top:20px; font-size:12px; color:#8a8570; flex-wrap:wrap; gap:10px;}
+/* parallax wall */
+.wall{padding:60px 0 150px;overflow:hidden}
+.wall-row{display:flex;gap:24px;width:max-content;margin-bottom:24px}
+.wall-row .cell{width:280px;height:360px;flex-shrink:0}
+.wall-row.r2 .cell{height:220px}
+
+/* testimonials */
+.testimonials{padding:150px 0;display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.test-imgs{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.test-imgs .ph-block:first-child{aspect-ratio:3/4;margin-top:50px}
+.test-imgs .ph-block:last-child{aspect-ratio:3/4}
+.test-copy blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.4rem,2.6vw,2.1rem);line-height:1.45;margin-bottom:26px}
+.test-nav{display:flex;gap:22px;align-items:center;margin-top:34px}
+.test-nav button{background:none;border:1px solid var(--ink);width:46px;height:46px;border-radius:50%;cursor:pointer;font-size:1.1rem;transition:.3s}
+.test-nav button:hover{background:var(--ink);color:var(--paper)}
+@media(max-width:760px){.testimonials{grid-template-columns:1fr}}
+
+/* secondary video */
+.video2{padding:150px 0;display:grid;grid-template-columns:.7fr 1.3fr;gap:60px;align-items:center}
+.video2 .ph-block.b{aspect-ratio:9/16;max-width:340px}
+.video2 h2{font-size:clamp(1.8rem,3.5vw,2.8rem)}
+@media(max-width:760px){.video2{grid-template-columns:1fr}.video2 .ph-block.b{margin:0 auto}}
+
+/* closing cta */
+.closing{height:80vh;min-height:520px;position:relative;display:flex;align-items:center;justify-content:center;text-align:center}
+.closing-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+.closing-inner{position:relative;z-index:1;color:#fff}
+.closing h2{font-size:clamp(2.4rem,6vw,4.4rem);margin-bottom:36px}
+.closing .btn{color:#fff;border-color:#fff}
+
+/* footer */
+footer{background:var(--ink);color:var(--cream);padding:100px 0 40px}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px;margin-bottom:60px}
+.footer-top .logo{font-family:'Playfair Display',serif;font-size:2rem}
+.footer-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;max-width:340px;color:rgba(236,228,214,.7)}
+.insta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:60px}
+.insta-grid .cell{aspect-ratio:1/1}
+.footer-links{display:flex;flex-wrap:wrap;gap:36px;justify-content:center;margin-bottom:50px}
+.footer-links a{color:var(--cream);text-decoration:none;opacity:.8}
+.footer-links a:hover{opacity:1}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;border-top:1px solid rgba(236,228,214,.15);padding-top:26px;font-size:.72rem;letter-spacing:.1em;color:rgba(236,228,214,.5)}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <div class="logo">COCONUT<span>WEDDING FILMS</span></div>
-    <nav><ul>
-      <li><a href="#top">Home</a></li>
-      <li><a href="#why">About</a></li>
-      <li><a href="#stories">Portfolio</a></li>
-      <li><a href="#work">Films</a></li>
-      <li><a href="#packages">Packages</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul></nav>
-    <div class="head-actions">
-      <a href="#contact" class="btn btn-gold" style="padding:10px 20px; font-size:13px;">Check Your Date</a>
-      <div class="wa">◔</div>
-    </div>
+<nav id="nav">
+  <div class="logo">COCONUT</div>
+  <ul class="upx">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#portfolio">Stories</a></li>
+    <li><a href="#film">Films</a></li>
+    <li><a href="#contact">Get in Touch</a></li>
+  </ul>
+  <div class="social upx"><a href="#" style="color:inherit;text-decoration:none">IG</a><a href="#" style="color:inherit;text-decoration:none">FB</a></div>
+</nav>
+
+<header class="hero" id="hero">
+  <div class="hero-img ph-block" data-label="Hero photograph 01"></div>
+  <div class="hero-img ph-block b" data-label="Hero photograph 02"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Stories Worth<br>Falling For</h1>
+    <div class="upx">Cinematic Wedding Films</div>
   </div>
 </header>
 
-<main id="top">
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="eyebrow">Coconut Wedding Films</div>
-        <h1>Wedding Photography &amp; Films<br><em>for the moments you'll never get back.</em></h1>
-        <div class="loc">KERALA · INDIA · WORLDWIDE</div>
-        <div class="hero-actions">
-          <a href="#stories" class="btn btn-gold">View Our Work →</a>
-          <a href="#contact" class="btn btn-outline">Check Your Date</a>
-        </div>
-        <div class="stats">
-          <div><b>11+</b><span>Years of Experience</span></div>
-          <div><b>600+</b><span>Weddings Captured</span></div>
-          <div><b>Kerala</b><span>Based in Thrissur</span></div>
-          <div><b>Pan-India</b><span>&amp; Destination</span></div>
-        </div>
-      </div>
-      <div class="hero-img frame">
-        <img src="images/hero.jpg" alt="Couple portrait">
-        <div class="shade"></div>
-        <div class="caption"><div class="play-chip"><div class="play-circ">▶</div> Watch Our Showreel · 0:32</div></div>
-      </div>
-    </div>
-  </section>
+<section class="intro wrap">
+  <div class="upx reveal">The Feeling</div>
+  <h2 class="reveal">We don't just film your wedding day — we bottle the way it felt, so you can return to it, again and again, for the rest of your lives.</h2>
+  <a href="#portfolio" class="circle-btn reveal">+</a>
+</section>
 
-  <section id="stories" style="padding-top:20px;">
-    <div class="wrap">
-      <div class="row-head">
-        <div>
-          <div class="eyebrow">Featured Weddings</div>
-          <h2 style="font-size:28px;">Real Love Stories</h2>
-        </div>
-        <a href="#" class="btn btn-outline" style="padding:10px 18px; font-size:13px;">View All Stories →</a>
-      </div>
-      <div class="stories-grid">
-        <div class="story frame"><img src="images/story-1.jpg" alt="Sreejith and Aakriti wedding"><div class="shade"></div><div class="caption"><b>Sreejith + Aakriti</b><span>Thrissur · Kerala</span></div></div>
-        <div class="story frame"><img src="images/story-2.jpg" alt="Eyne and Joel wedding"><div class="shade"></div><div class="caption"><b>Eyne + Joel</b><span>Kochi · Kerala</span></div></div>
-        <div class="story frame"><img src="images/story-3.jpg" alt="Aswth and Sapna wedding"><div class="shade"></div><div class="caption"><b>Aswth + Sapna</b><span>Munnar · Kerala</span></div></div>
-        <div class="story frame"><img src="images/story-4.jpg" alt="Durga Krishna and Arjun wedding"><div class="shade"></div><div class="caption"><b>Durga Krishna + Arjun</b><span>Calicut · Kerala</span></div></div>
-        <div class="story frame"><img src="images/story-5.jpg" alt="Durga Krishna and Arjun wedding"><div class="shade"></div><div class="caption"><b>Durga Krishna + Arjun</b><span>Calicut · Kerala</span></div></div>
-      </div>
-    </div>
-  </section>
+<section class="film" id="film">
+  <div class="film-media ph-block b" data-label="Background film loop, muted / autoplay"></div>
+  <div class="film-overlay"></div>
+  <h2 class="reveal">Watch Our Films</h2>
+</section>
 
-  <section class="why" id="why">
-    <div class="wrap why-grid">
-      <div>
-        <div class="eyebrow">Why Coconut</div>
-        <h2 style="font-size:30px;">More Than Just<br>Photography &amp; Films</h2>
-        <p>We're a team of storytellers, capturing real emotions, raw moments and timeless memories. From intimate ceremonies to grand celebrations, we bring your story to life with heart and detail.</p>
-        <a href="#" class="btn btn-gold">About Us →</a>
-      </div>
-      <div class="feat-row">
-        <div class="feat"><div class="icon">◈</div><b>11+</b><span>Years Experience</span></div>
-        <div class="feat"><div class="icon">◈</div><b>600+</b><span>Weddings Captured</span></div>
-        <div class="feat"><div class="icon">◈</div><b>Kerala</b><span>Based in Thrissur</span></div>
-        <div class="feat"><div class="icon">◈</div><b>Pan-India</b><span>&amp; Worldwide</span></div>
-        <div class="feat"><div class="icon">◈</div><b>One Team</b><span>Photography + Films</span></div>
-      </div>
+<section class="mission wrap">
+  <div class="watermark">COCONUT</div>
+  <div class="mission-inner">
+    <div class="upx reveal">Our Promise</div>
+    <h2 class="reveal">To hand you back your wedding day not as a memory that fades, but as a film you can fall into whenever you like.</h2>
+    <div class="cta-row upx reveal">
+      <a href="#portfolio" class="btn">Stories</a>
+      <a href="#film" class="btn">Films</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="cream" id="work">
-    <div class="wrap work-grid">
-      <div class="video-block frame">
-        <img src="images/video-thumb.jpg" alt="Wedding film still">
-        <div class="shade"></div>
-        <div class="caption" style="text-align:center; width:100%;">Watch the Coconut Story · 0:22</div>
-      </div>
-      <div>
-        <div class="eyebrow" style="color:#8a7433;">Our Work</div>
-        <h2 style="font-size:28px;">Photography &amp; Cinematography</h2>
-        <div class="cat-grid">
-          <div class="cat frame"><img src="images/cat-candid.jpg" alt="Candid photography"><div class="shade"></div><div class="caption"><span>Candid</span></div></div>
-          <div class="cat frame"><img src="images/cat-traditional.jpg" alt="Traditional photography"><div class="shade"></div><div class="caption"><span>Traditional</span></div></div>
-          <div class="cat frame"><img src="images/cat-editorial.jpg" alt="Editorial photography"><div class="shade"></div><div class="caption"><span>Editorial</span></div></div>
-          <div class="cat frame"><img src="images/cat-couples.jpg" alt="Couples photography"><div class="shade"></div><div class="caption"><span>Couples</span></div></div>
-        </div>
-        <a href="#" style="display:inline-block; margin-top:18px; font-size:13px; border-bottom:1px solid #26231b;">View Full Portfolio →</a>
-      </div>
-    </div>
-  </section>
+<section class="featured wrap">
+  <div class="row reveal">
+    <span>Vogue</span><span>Harper's Bazaar</span><span>Martha Stewart Weddings</span><span>Brides</span><span>Over The Moon</span>
+  </div>
+</section>
 
-  <section>
-    <div class="wrap">
-      <div class="eyebrow">What Our Couples Say</div>
-      <h2 style="font-size:28px; margin-bottom:30px;">Real People. Real Stories.</h2>
-      <div class="rev-grid">
-        <div class="quote-card frame">
-          <img src="images/testimonial-1.jpg" alt="Aswin and Sneha">
-          <div class="shade"></div>
-          <div class="caption"><blockquote>"The team made us feel so comfortable and captured every emotion so beautifully. We couldn't have asked for more!"<cite>— Aswin &amp; Sneha, Thrissur</cite></blockquote></div>
-        </div>
-        <div class="g-rev" style="text-align:center;">
-          <span style="color:var(--gold-soft); font-size:20px;">G</span>
-          <span style="display:block; font-size:13px; color:var(--muted);">Google Reviews</span>
-          <b>4.9/5</b>
-          <div class="stars">★★★★★</div>
-          <span style="font-size:12px; color:var(--muted);">120+ reviews</span><br>
-          <a href="#" style="font-size:12px; color:var(--gold-soft); display:inline-block; margin-top:10px;">Read All Reviews →</a>
-        </div>
-        <div>
-          <span style="font-size:12px; color:var(--muted);">Follow the Stories · @coconutweddingfilms</span>
-          <div class="insta-grid" style="margin-top:14px;">
-            <div class="insta frame"><img src="images/insta-1.jpg" alt="Instagram post"></div>
-            <div class="insta frame"><img src="images/insta-2.jpg" alt="Instagram post"></div>
-            <div class="insta frame"><img src="images/insta-3.jpg" alt="Instagram post"></div>
-            <div class="insta frame"><img src="images/insta-4.jpg" alt="Instagram post"></div>
-            <div class="insta frame"><img src="images/insta-5.jpg" alt="Instagram post"></div>
-            <div class="insta frame"><img src="images/insta-6.jpg" alt="Instagram post"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="portfolio wrap" id="portfolio">
+  <div class="portfolio-grid">
+    <div class="ph-block tall reveal" data-label="Portfolio — Amalfi Coast"></div>
+    <div class="ph-block short reveal" data-label="Portfolio — Provence"></div>
+  </div>
+  <div class="portfolio-text reveal">
+    <div class="upx">Recent Films</div>
+    <h2>A growing archive of real weddings, real emotion, shot from island shores to mountain chapels.</h2>
+    <a href="#" class="btn upx">View Films</a>
+  </div>
+</section>
 
-  <section class="cream" id="packages">
-    <div class="wrap">
-      <div class="eyebrow" style="color:#8a7433;">Our Packages</div>
-      <h2 style="font-size:28px;">Wedding Collections</h2>
-      <p class="muted" style="max-width:44ch; margin-top:8px;">Flexible packages to suit your needs. Custom quotes for destination weddings.</p>
-      <div class="pkg-grid">
-        <div class="pkg-card"><div class="icon">◈</div><b>Photography</b><span>From ₹ XX,XXX</span></div>
-        <div class="pkg-card"><div class="icon">◈</div><b>Cinematography</b><span>From ₹ XX,XXX</span></div>
-        <div class="pkg-card"><div class="icon">◈</div><b>Photo + Film</b><span>From ₹ XX,XXX</span></div>
-      </div>
-      <a href="#contact" class="btn" style="background:#1a1712; color:#f4f0e6; margin-top:22px;">Get Complete Package →</a>
-    </div>
-  </section>
+<section class="about-teaser wrap" id="about">
+  <div class="ph-block reveal" data-label="Founder Portrait"></div>
+  <div class="copy reveal">
+    <div class="upx">Who We Are</div>
+    <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.6rem);margin:18px 0 26px">The Faces Behind the Camera</h2>
+    <p>Coconut Wedding Films is a small crew of storytellers who travel wherever love takes us — from island shores to countryside chapels — filming days as they unfold, never staged.</p>
+    <a href="#" class="btn upx">About Us</a>
+  </div>
+</section>
 
-  <section id="faq">
-    <div class="wrap faq-grid">
-      <div>
-        <div class="eyebrow">Frequently Asked Questions</div>
-        <h2 style="font-size:28px; margin-bottom:16px;">Get Questions?</h2>
-        <div class="faq-item">How early should we book you? <span>+</span></div>
-        <div class="faq-item">Do you travel outside Kerala? <span>+</span></div>
-        <div class="faq-item">How many photographers come? <span>+</span></div>
-        <div class="faq-item">When will we receive the photos? <span>+</span></div>
-        <div class="faq-item">Do you provide drone coverage? <span>+</span></div>
-        <a href="#" style="display:inline-block; margin-top:18px; font-size:13px; color:var(--gold-soft);">View All FAQs →</a>
-      </div>
-      <div class="form-card" id="contact">
-        <div class="eyebrow" style="color:#8a7433;">Check Your Wedding Date</div>
-        <h3 style="font-size:20px; margin-bottom:18px;">Let's see if your date is available!</h3>
-        <div class="form-row">
-          <div><label>Wedding Date</label><input type="text" placeholder="DD / MM / YYYY"></div>
-          <div><label>Location</label><input type="text" placeholder="e.g. Kochi, Thrissur, Dubai"></div>
-        </div>
-        <div class="form-row">
-          <div><label>Your Name</label><input type="text" placeholder="Full Name"></div>
-          <div><label>WhatsApp Number</label><input type="text" placeholder="+91 98765 43210"></div>
-        </div>
-        <div class="form-row">
-          <div><label>Service Interested In</label><select><option>Select an option</option></select></div>
-          <div><label>Estimated Budget</label><select><option>Select budget range</option></select></div>
-        </div>
-        <button type="button">Check Availability →</button>
-      </div>
-    </div>
-  </section>
+<section class="wall" id="wall">
+  <div class="wall-row r1">
+    <div class="cell ph-block" data-label="01"></div><div class="cell ph-block b" data-label="02"></div><div class="cell ph-block" data-label="03"></div><div class="cell ph-block b" data-label="04"></div><div class="cell ph-block" data-label="05"></div><div class="cell ph-block b" data-label="06"></div>
+  </div>
+  <div class="wall-row r2">
+    <div class="cell ph-block b" data-label="07"></div><div class="cell ph-block" data-label="08"></div><div class="cell ph-block b" data-label="09"></div><div class="cell ph-block" data-label="10"></div><div class="cell ph-block b" data-label="11"></div><div class="cell ph-block" data-label="12"></div>
+  </div>
+</section>
 
-  <section class="cta frame">
-    <img src="images/cta-bg.jpg" alt="Wedding decor">
-    <div class="shade"></div>
-    <div class="wrap caption">
-      <div class="eyebrow">Let's Create Something Beautiful</div>
-      <h2>Your wedding happens once.<br><span style="color:var(--gold-soft); font-size:.6em;">Let's make sure you remember it properly.</span></h2>
-      <div class="hero-actions">
-        <a href="#" class="btn btn-gold">WhatsApp Us ◔</a>
-        <a href="#contact" class="btn btn-outline">Check Your Date</a>
-      </div>
+<section class="testimonials wrap">
+  <div class="test-imgs reveal">
+    <div class="ph-block" data-label="Client A"></div>
+    <div class="ph-block b" data-label="Client B"></div>
+  </div>
+  <div class="test-copy reveal">
+    <blockquote id="quote">"Coconut didn't just film our wedding — they captured the feeling of it. Every frame feels like a memory we forgot we had."</blockquote>
+    <div class="upx" id="client">— Amélie &amp; Julien, Provence</div>
+    <div class="test-nav">
+      <button id="prevT" aria-label="Previous">←</button>
+      <button id="nextT" aria-label="Next">→</button>
     </div>
-  </section>
-</main>
+  </div>
+</section>
+
+<section class="video2 wrap">
+  <div class="ph-block b reveal" data-label="Portrait film loop"></div>
+  <h2 class="serif reveal">The quiet moments say the most — we make sure they're never lost.</h2>
+</section>
+
+<section class="closing" id="contact">
+  <div class="ph-block b" style="position:absolute;inset:0"></div>
+  <div class="closing-overlay"></div>
+  <div class="closing-inner">
+    <h2 class="reveal">Let's Film Your Forever</h2>
+    <a href="#" class="btn upx reveal">Get In Touch</a>
+  </div>
+</section>
 
 <footer>
   <div class="wrap">
-    <div class="foot-top">
-      <div class="logo" style="color:#26231b;">COCONUT<span style="color:#6e6a5c;">WEDDING FILMS</span></div>
-      <nav class="foot-nav"><ul>
-        <li><a href="#top">Home</a></li>
-        <li><a href="#why">About</a></li>
-        <li><a href="#stories">Portfolio</a></li>
-        <li><a href="#work">Films</a></li>
-        <li><a href="#packages">Packages</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul></nav>
+    <div class="footer-top">
+      <div class="logo">COCONUT</div>
+      <div class="footer-tagline">Films for the couples who'd rather live the moment than pose for it.</div>
     </div>
-    <div class="foot-bottom">
-      <span>Irinjalakuda, Thrissur, Kerala, India · Worldwide</span>
+    <div class="insta-grid">
+      <div class="cell ph-block" data-label="IG"></div><div class="cell ph-block b" data-label="IG"></div><div class="cell ph-block" data-label="IG"></div><div class="cell ph-block b" data-label="IG"></div>
+    </div>
+    <div class="footer-links upx">
+      <a href="#hero">Home</a><a href="#about">About Us</a><a href="#portfolio">Stories</a><a href="#film">Films</a><a href="#contact">Get in Touch</a>
+    </div>
+    <div class="footer-bottom">
       <span>© 2026 Coconut Wedding Films. All rights reserved.</span>
+      <span>Site by Studio Atelier</span>
     </div>
   </div>
 </footer>
 
+<script>
+// nav solid on scroll
+const nav = document.getElementById('nav');
+addEventListener('scroll',()=>{ nav.classList.toggle('solid', scrollY > 80); }, {passive:true});
+
+// scroll reveal
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// parallax wall
+const rows = document.querySelectorAll('.wall-row');
+addEventListener('scroll',()=>{
+  const wall = document.getElementById('wall');
+  const r = wall.getBoundingClientRect();
+  if(r.bottom > 0 && r.top < innerHeight){
+    const p = (innerHeight - r.top) * 0.06;
+    rows[0].style.transform = `translateX(${-p*1.4}px)`;
+    rows[1].style.transform = `translateX(${p*0.8 - 140}px)`;
+  }
+},{passive:true});
+
+// testimonial carousel
+const testimonials = [
+  {quote:'"Coconut didn\\'t just film our wedding — they captured the feeling of it. Every frame feels like a memory we forgot we had."', client:'— Amélie & Julien, Provence'},
+  {quote:'"From the first email to the final gallery, everything felt effortless. The photos are timeless — we will treasure them forever."', client:'— Sofia & Marco, Lake Como'},
+  {quote:'"He has a way of disappearing into the day while somehow capturing every single moment that mattered most to us."', client:'— Grace & Theo, Santorini'}
+];
+let ti = 0;
+const q = document.getElementById('quote'), c = document.getElementById('client');
+function renderT(){ q.textContent = testimonials[ti].quote; c.textContent = testimonials[ti].client; }
+document.getElementById('nextT').onclick = ()=>{ ti = (ti+1) % testimonials.length; renderT(); };
+document.getElementById('prevT').onclick = ()=>{ ti = (ti-1+testimonials.length) % testimonials.length; renderT(); };
+</script>
 </body>
 </html>
